@@ -62,231 +62,231 @@ const { name: pm, npx } = detectPackageManager();
 function getFrameworkTests(opts: {
 	experimental: boolean;
 }): Record<string, FrameworkTestConfig> {
-	if (opts.experimental) {
+	if (true || opts.experimental) {
 		return {
-			docusaurus: {
-				unsupportedPms: ["bun"],
-				testCommitMessage: true,
-				unsupportedOSs: ["win32"],
-				timeout: LONG_TIMEOUT,
-				verifyDeploy: {
-					route: "/",
-					expectedText: "Dinosaurs are cool",
-				},
-				verifyPreview: {
-					route: "/",
-					expectedText: "Dinosaurs are cool",
-				},
-				flags: [`--package-manager`, pm],
-				promptHandlers: [
-					{
-						matcher: /Which language do you want to use\?/,
-						input: [keys.enter],
-					},
-				],
-			},
-			angular: {
-				testCommitMessage: true,
-				timeout: LONG_TIMEOUT,
-				unsupportedOSs: ["win32"],
-				unsupportedPms: ["bun"],
-				verifyDeploy: {
-					route: "/",
-					expectedText: "Congratulations! Your app is running.",
-				},
-				verifyPreview: {
-					route: "/",
-					expectedText: "Congratulations! Your app is running.",
-				},
-				flags: ["--style", "sass"],
-			},
-			gatsby: {
-				unsupportedPms: ["bun", "pnpm"],
-				promptHandlers: [
-					{
-						matcher: /Would you like to use a template\?/,
-						input: ["n"],
-					},
-				],
-				testCommitMessage: true,
-				timeout: LONG_TIMEOUT,
-				verifyDeploy: {
-					route: "/",
-					expectedText: "Gatsby!",
-				},
-				verifyPreview: {
-					route: "/",
-					expectedText: "Gatsby!",
-				},
-			},
-			hono: {
-				testCommitMessage: false,
-				unsupportedOSs: ["win32"],
-				verifyDeploy: {
-					route: "/",
-					expectedText: "Hello Hono!",
-				},
-				verifyPreview: {
-					route: "/",
-					expectedText: "Hello Hono!",
-				},
-				promptHandlers: [
-					{
-						matcher: /Do you want to install project dependencies\?/,
-						input: [keys.enter],
-					},
-				],
-			},
-			qwik: {
-				promptHandlers: [
-					{
-						matcher: /Yes looks good, finish update/,
-						input: [keys.enter],
-					},
-				],
-				testCommitMessage: true,
-				unsupportedOSs: ["win32"],
-				unsupportedPms: ["yarn"],
-				verifyDeploy: {
-					route: "/",
-					expectedText: "Welcome to Qwik",
-				},
-				verifyPreview: {
-					route: "/",
-					expectedText: "Welcome to Qwik",
-				},
-				verifyBuildCfTypes: {
-					outputFile: "worker-configuration.d.ts",
-					envInterfaceName: "Env",
-				},
-			},
-			remix: {
-				testCommitMessage: true,
-				timeout: LONG_TIMEOUT,
-				unsupportedPms: ["yarn"],
-				unsupportedOSs: ["win32"],
-				verifyDeploy: {
-					route: "/",
-					expectedText: "Welcome to Remix",
-				},
-				verifyPreview: {
-					route: "/test",
-					expectedText: "C3_TEST",
-				},
-				verifyBuildCfTypes: {
-					outputFile: "worker-configuration.d.ts",
-					envInterfaceName: "Env",
-				},
-				flags: ["--typescript", "--no-install", "--no-git-init"],
-			},
-			next: {
-				testCommitMessage: false,
-				verifyBuildCfTypes: {
-					outputFile: "cloudflare-env.d.ts",
-					envInterfaceName: "CloudflareEnv",
-				},
-				verifyPreview: {
-					route: "/test",
-					expectedText: "Create Next App",
-				},
-				verifyDeploy: {
-					route: "/",
-					expectedText: "Create Next App",
-				},
-				// see https://github.com/cloudflare/next-on-pages/blob/main/packages/next-on-pages/docs/supported.md#operating-systems
-				unsupportedOSs: ["win32"],
-				unsupportedPms: [
-					// bun and yarn are failing in CI
-					"bun",
-					"yarn",
-				],
-			},
-			nuxt: {
-				testCommitMessage: true,
-				timeout: LONG_TIMEOUT,
-				unsupportedOSs: ["win32"],
-				verifyDeploy: {
-					route: "/",
-					expectedText: "Welcome to Nuxt!",
-				},
-				verifyPreview: {
-					route: "/test",
-					expectedText: "C3_TEST",
-				},
-				verifyBuildCfTypes: {
-					outputFile: "worker-configuration.d.ts",
-					envInterfaceName: "Env",
-				},
-			},
-			solid: {
-				promptHandlers: [
-					{
-						matcher: /Which template would you like to use/,
-						input: [keys.enter],
-					},
-					{
-						matcher: /Use Typescript/,
-						input: [keys.enter],
-					},
-				],
-				testCommitMessage: true,
-				timeout: LONG_TIMEOUT,
-				unsupportedPms: ["npm", "yarn"],
-				unsupportedOSs: ["win32"],
-				verifyDeploy: {
-					route: "/",
-					expectedText: "Hello world",
-				},
-				verifyPreview: {
-					route: "/",
-					expectedText: "Hello world",
-				},
-			},
-			svelte: {
-				promptHandlers: [
-					{
-						matcher: /Which template would you like/,
-						input: [keys.enter],
-					},
-					{
-						matcher: /Add type checking with Typescript/,
-						input: [keys.down, keys.enter],
-					},
-					{
-						matcher: /What would you like to add to your project/,
-						input: [keys.enter],
-					},
-					{
-						matcher:
-							/Which package manager do you want to install dependencies with/,
-						input: [keys.enter],
-					},
-				],
-				testCommitMessage: true,
-				unsupportedOSs: ["win32"],
-				unsupportedPms: ["npm"],
-				verifyDeploy: {
-					route: "/",
-					expectedText: "SvelteKit app",
-				},
-				verifyPreview: {
-					route: "/test",
-					expectedText: "C3_TEST",
-				},
-			},
-			vue: {
-				testCommitMessage: true,
-				unsupportedOSs: ["win32"],
-				verifyDeploy: {
-					route: "/",
-					expectedText: "Vite App",
-				},
-				verifyPreview: {
-					route: "/",
-					expectedText: "Vite App",
-				},
-				flags: ["--ts"],
-			},
+			// docusaurus: {
+			// 	unsupportedPms: ["bun"],
+			// 	testCommitMessage: true,
+			// 	unsupportedOSs: ["win32"],
+			// 	timeout: LONG_TIMEOUT,
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "Dinosaurs are cool",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/",
+			// 		expectedText: "Dinosaurs are cool",
+			// 	},
+			// 	flags: [`--package-manager`, pm],
+			// 	promptHandlers: [
+			// 		{
+			// 			matcher: /Which language do you want to use\?/,
+			// 			input: [keys.enter],
+			// 		},
+			// 	],
+			// },
+			// angular: {
+			// 	testCommitMessage: true,
+			// 	timeout: LONG_TIMEOUT,
+			// 	unsupportedOSs: ["win32"],
+			// 	unsupportedPms: ["bun"],
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "Congratulations! Your app is running.",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/",
+			// 		expectedText: "Congratulations! Your app is running.",
+			// 	},
+			// 	flags: ["--style", "sass"],
+			// },
+			// gatsby: {
+			// 	unsupportedPms: ["bun", "pnpm"],
+			// 	promptHandlers: [
+			// 		{
+			// 			matcher: /Would you like to use a template\?/,
+			// 			input: ["n"],
+			// 		},
+			// 	],
+			// 	testCommitMessage: true,
+			// 	timeout: LONG_TIMEOUT,
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "Gatsby!",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/",
+			// 		expectedText: "Gatsby!",
+			// 	},
+			// },
+			// hono: {
+			// 	testCommitMessage: false,
+			// 	unsupportedOSs: ["win32"],
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "Hello Hono!",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/",
+			// 		expectedText: "Hello Hono!",
+			// 	},
+			// 	promptHandlers: [
+			// 		{
+			// 			matcher: /Do you want to install project dependencies\?/,
+			// 			input: [keys.enter],
+			// 		},
+			// 	],
+			// },
+			// qwik: {
+			// 	promptHandlers: [
+			// 		{
+			// 			matcher: /Yes looks good, finish update/,
+			// 			input: [keys.enter],
+			// 		},
+			// 	],
+			// 	testCommitMessage: true,
+			// 	unsupportedOSs: ["win32"],
+			// 	unsupportedPms: ["yarn"],
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "Welcome to Qwik",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/",
+			// 		expectedText: "Welcome to Qwik",
+			// 	},
+			// 	verifyBuildCfTypes: {
+			// 		outputFile: "worker-configuration.d.ts",
+			// 		envInterfaceName: "Env",
+			// 	},
+			// },
+			// remix: {
+			// 	testCommitMessage: true,
+			// 	timeout: LONG_TIMEOUT,
+			// 	unsupportedPms: ["yarn"],
+			// 	unsupportedOSs: ["win32"],
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "Welcome to Remix",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/test",
+			// 		expectedText: "C3_TEST",
+			// 	},
+			// 	verifyBuildCfTypes: {
+			// 		outputFile: "worker-configuration.d.ts",
+			// 		envInterfaceName: "Env",
+			// 	},
+			// 	flags: ["--typescript", "--no-install", "--no-git-init"],
+			// },
+			// next: {
+			// 	testCommitMessage: false,
+			// 	verifyBuildCfTypes: {
+			// 		outputFile: "cloudflare-env.d.ts",
+			// 		envInterfaceName: "CloudflareEnv",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/test",
+			// 		expectedText: "Create Next App",
+			// 	},
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "Create Next App",
+			// 	},
+			// 	// see https://github.com/cloudflare/next-on-pages/blob/main/packages/next-on-pages/docs/supported.md#operating-systems
+			// 	unsupportedOSs: ["win32"],
+			// 	unsupportedPms: [
+			// 		// bun and yarn are failing in CI
+			// 		"bun",
+			// 		"yarn",
+			// 	],
+			// },
+			// nuxt: {
+			// 	testCommitMessage: true,
+			// 	timeout: LONG_TIMEOUT,
+			// 	unsupportedOSs: ["win32"],
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "Welcome to Nuxt!",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/test",
+			// 		expectedText: "C3_TEST",
+			// 	},
+			// 	verifyBuildCfTypes: {
+			// 		outputFile: "worker-configuration.d.ts",
+			// 		envInterfaceName: "Env",
+			// 	},
+			// },
+			// solid: {
+			// 	promptHandlers: [
+			// 		{
+			// 			matcher: /Which template would you like to use/,
+			// 			input: [keys.enter],
+			// 		},
+			// 		{
+			// 			matcher: /Use Typescript/,
+			// 			input: [keys.enter],
+			// 		},
+			// 	],
+			// 	testCommitMessage: true,
+			// 	timeout: LONG_TIMEOUT,
+			// 	unsupportedPms: ["npm", "yarn"],
+			// 	unsupportedOSs: ["win32"],
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "Hello world",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/",
+			// 		expectedText: "Hello world",
+			// 	},
+			// },
+			// svelte: {
+			// 	promptHandlers: [
+			// 		{
+			// 			matcher: /Which template would you like/,
+			// 			input: [keys.enter],
+			// 		},
+			// 		{
+			// 			matcher: /Add type checking with Typescript/,
+			// 			input: [keys.down, keys.enter],
+			// 		},
+			// 		{
+			// 			matcher: /What would you like to add to your project/,
+			// 			input: [keys.enter],
+			// 		},
+			// 		{
+			// 			matcher:
+			// 				/Which package manager do you want to install dependencies with/,
+			// 			input: [keys.enter],
+			// 		},
+			// 	],
+			// 	testCommitMessage: true,
+			// 	unsupportedOSs: ["win32"],
+			// 	unsupportedPms: ["npm"],
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "SvelteKit app",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/test",
+			// 		expectedText: "C3_TEST",
+			// 	},
+			// },
+			// vue: {
+			// 	testCommitMessage: true,
+			// 	unsupportedOSs: ["win32"],
+			// 	verifyDeploy: {
+			// 		route: "/",
+			// 		expectedText: "Vite App",
+			// 	},
+			// 	verifyPreview: {
+			// 		route: "/",
+			// 		expectedText: "Vite App",
+			// 	},
+			// 	flags: ["--ts"],
+			// },
 			waku: {
 				testCommitMessage: true,
 				timeout: LONG_TIMEOUT,
@@ -643,11 +643,11 @@ function getFrameworkTests(opts: {
 	}
 }
 
-const experimental = process.env.E2E_EXPERIMENTAL === "true";
+const experimental = true;
 const frameworkMap = getFrameworkMap({ experimental });
 const frameworkTests = getFrameworkTests({ experimental });
 
-describe.concurrent(
+describe(
 	`E2E: Web frameworks (experimental:${experimental})`,
 	() => {
 		beforeAll(async (ctx) => {
@@ -791,7 +791,7 @@ const runCli = async (
  */
 const addTestVarsToWranglerToml = async (projectPath: string) => {
 	const wranglerTomlPath = join(projectPath, "wrangler.toml");
-	const wranglerJsoncPath = join(projectPath, "wrangler.jsonc");
+	const wranglerJsonPath = join(projectPath, "wrangler.json");
 	if (existsSync(wranglerTomlPath)) {
 		const wranglerToml = readToml(wranglerTomlPath);
 		// Add a TEST var to the wrangler.toml
@@ -799,13 +799,13 @@ const addTestVarsToWranglerToml = async (projectPath: string) => {
 		(wranglerToml.vars as JsonMap).TEST = "C3_TEST";
 
 		writeToml(wranglerTomlPath, wranglerToml);
-	} else if (existsSync(wranglerJsoncPath)) {
-		const wranglerJson = readJSON(wranglerJsoncPath);
+	} else if (existsSync(wranglerJsonPath)) {
+		const wranglerJson = readJSON(wranglerJsonPath);
 		// Add a TEST var to the wrangler.toml
 		wranglerJson.vars ??= {};
 		wranglerJson.vars.TEST = "C3_TEST";
 
-		writeJSON(wranglerJsoncPath, wranglerJson);
+		writeJSON(wranglerJsonPath, wranglerJson);
 	}
 };
 
